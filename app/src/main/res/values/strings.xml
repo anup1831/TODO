@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Loaders</string>
+    <string name="action_settings">Settings</string>
+    <string name="desc_cmt">Description not available, but it will available in imediate future. hopefully by the end of today. you can avle to add and edit the description. Some might think it that its not possible but I perosnally believe that its possible to accomplish this task</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="navigation_desc_btn_clk">straight</string>
+    <string name="navigation_by_title_clk">todoTitle</string>
+</resources>
