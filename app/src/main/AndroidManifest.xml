@@ -23,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.pathfinder.anup.screens.TodoDetailsScreen"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden"/>
+        <activity android:name="com.pathfinder.anup.alarm.AlarmMainActivity"/>
     </application>
 
 </manifest>
