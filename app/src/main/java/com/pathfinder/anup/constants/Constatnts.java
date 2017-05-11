@@ -12,9 +12,11 @@ public class Constatnts {
     public static final String TODO_TITLE = "title";
     public static final int REQUEST_CODE = 100;
     public static final int REQUEST_CODE1 = 101;
+    public static final int REQUEST_ALARM = 102;
     public static String IS_TODO_ADDED = "false";
     public static String IS_VALUE_UPDATED = "";
     public static String NAVIGATION = "navigate";
+    public static String ALARM_TIMING = "alarm";
     public static final String LOADING_FROM_MAIN_ACTIVITY = "MainActivity";
 
 

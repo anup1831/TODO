@@ -26,7 +26,7 @@
             android:gravity="center|left"
             android:textSize="22sp"
             android:typeface="monospace"
-            android:layout_weight=".8"/>
+            android:layout_weight=".7"/>
 
         <ImageButton android:id="@+id/todo_desc"
             android:layout_width="0dp"
@@ -34,6 +34,14 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_6"
             android:layout_weight=".1"/>
+
+        <ImageButton android:id="@+id/todo_alarm"
+            android:layout_width="0dp"
+            android:background="@drawable/clock40x40"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_6"
+            android:layout_weight=".1"/>
+
         <ImageButton
             android:id="@+id/todo_add"
             android:layout_width="0dp"

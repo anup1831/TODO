@@ -8,16 +8,20 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.provider.SyncStateContract;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.View;
@@ -32,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pathfinder.anup.adapters.TodoListAdapter;
+import com.pathfinder.anup.alarm.AlarmMainActivity;
 import com.pathfinder.anup.constants.Constatnts;
 import com.pathfinder.anup.database.LocalDBHelper;
 import com.pathfinder.anup.models.ModelDailyTodo;
@@ -46,12 +51,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ModelDailyTodo todo;
     LocalDBHelper dbHelper;
     EditText et_title;
-    ImageButton ib_desc, ib_add;
+    ImageButton ib_desc, ib_add, ib_alarm;
     ListView todoListView;
     List<ModelDailyTodo> todoList;
     TodoListAdapter todoListAdapter;
     private String descData;
     boolean isChildActivityData;
+    private String alarmValue;
+
+    public String getAlarmValue() {
+        return alarmValue;
+    }
+
+    public void setAlarmValue(String alarmValue) {
+        this.alarmValue = alarmValue;
+    }
 
     public boolean isChildActivityData() {
         return isChildActivityData;
@@ -98,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         et_title = (EditText) findViewById(R.id.todo_title);
         ib_desc = (ImageButton) findViewById(R.id.todo_desc);
         ib_desc.setOnClickListener(this);
+        ib_alarm = (ImageButton) findViewById(R.id.todo_alarm) ;
+        ib_alarm.setOnClickListener(this);
         /*ib_add = (ImageButton) */findViewById(R.id.todo_add).setOnClickListener(this);
         //ib_add.setOnClickListener(this);
         todoListView = (ListView) findViewById(R.id.id_todoList);
@@ -206,6 +222,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setDescData(data.getExtras().getString(Constatnts.DESC_DATA));
                 Log.i("Anup", "DESCDATA - "+getDescData());
             }
+        } else if(resultCode == RESULT_OK && requestCode == Constatnts.REQUEST_ALARM){
+            if(data.hasExtra(Constatnts.ALARM_TIMING)){
+                setAlarmValue(data.getStringExtra(Constatnts.ALARM_TIMING));
+                Log.i("Anup", "ALARMDATA - "+getAlarmValue());
+            }
         }
     }
 
@@ -219,6 +240,39 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivityForResult(intent, Constatnts.REQUEST_CODE);*/
 
         navigateToDetails(ID, title, itemDetails);
+    }
+
+    @Override
+    public void onTimeChange(/*TextView str*/) {
+        Intent timeIntent = new Intent(getApplicationContext(), AlarmMainActivity.class);
+        startActivityForResult(timeIntent, Constatnts.REQUEST_ALARM);
+       // str.setTextColor(Color.BLACK);
+       // str.setText(getAlarmValue());
+        /*str.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                str.setText(getAlarmValue());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });*/
+        Toast.makeText(getApplicationContext(), getAlarmValue(), Toast.LENGTH_LONG).show();
+        Log.i("Anup", "ALARMDATA - "+getAlarmValue());
+
+    }
+
+
+    @Override
+    public void onCalederChange() {
+        Toast.makeText(getApplicationContext(), "Calender feature will come soon", Toast.LENGTH_LONG).show();
     }
 
     private void navigateToDetails(int ID, String title, String details){

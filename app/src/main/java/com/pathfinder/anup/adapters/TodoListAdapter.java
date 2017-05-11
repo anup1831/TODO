@@ -3,6 +3,8 @@ package com.pathfinder.anup.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,18 +92,23 @@ public class TodoListAdapter extends BaseAdapter {
             }
         });
         holder.time.setText("10:10");
-
+        //final TextView textView = holder.time;
         holder.time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Time feature will come soon", Toast.LENGTH_LONG).show();
+                onTitleClickListner.onTimeChange(/*textView*/);
+
             }
         });
+
+
+
 
         holder.calender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Calender feature will come soon", Toast.LENGTH_LONG).show();
+                onTitleClickListner.onCalederChange();
+
             }
         });
 
@@ -110,13 +117,16 @@ public class TodoListAdapter extends BaseAdapter {
 
     class ViewHolder {
         ImageView calender;
-        TextView title;
-        TextView time;
+        public TextView title;
+        public TextView time;
     }
 
 
     public interface OnTitleClickListner{
         void onTitleClick(int ID, String title, String itemDetails);
+        void onTimeChange(/*TextView text*/);
+        void onCalederChange();
+
     }
 
 
